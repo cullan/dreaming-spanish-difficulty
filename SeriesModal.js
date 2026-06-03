@@ -151,13 +151,20 @@ SeriesModal = (s) => {
             }, p.level)
           ),
           reactExports.createElement(
-            IconMoon,
+            'p',
             {
-              className: 'ds-series-modal__information-icon',
-              icon: 'thick-difficulty'
-            }
+              className: 'ds-series-modal__information-label'
+            },
+            reactExports.createElement(
+              IconMoon,
+              {
+                className: 'ds-series-modal__information-icon',
+                style: {'margin-right': '0.25rem'},
+                icon: 'thick-difficulty'
+              }
+            ),
+            `${minDifficulty}-${maxDifficulty}`,
           ),
-          `${minDifficulty}-${maxDifficulty}`,
           reactExports.createElement(
             IconMoon,
             {
