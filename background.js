@@ -1,16 +1,16 @@
-async function patchSrc() {
+async function replacementSrc() {
   fileNames = [
-    'VideoThumbnail.js',
-    'VideoSection.js',
-    'VideoCard.js',
-    'CatalogVideoCard.js',
-    'EpisodeCard.js',
-    'seriesDifficultyRange.js',
-    'SeriesCard.js',
-    'SeriesContinueWatching.js',
-    'SeriesCatalogs.js',
-    'SeriesModal.js',
-    'SeriesCarousel.js'
+    'replacements/VideoThumbnail.js',
+    'replacements/VideoSection.js',
+    'replacements/VideoCard.js',
+    'replacements/CatalogVideoCard.js',
+    'replacements/EpisodeCard.js',
+    'replacements/seriesDifficultyRange.js',
+    'replacements/SeriesCard.js',
+    'replacements/SeriesContinueWatching.js',
+    'replacements/SeriesCatalogs.js',
+    'replacements/SeriesModal.js',
+    'replacements/SeriesCarousel.js'
   ];
 
   const promises = fileNames.map(readFile);
@@ -37,8 +37,8 @@ function listener(details) {
   }
 
   filter.onstop = async event => {
-    const patch = await patchSrc();
-    script += patch;
+    const replacements = await replacementSrc();
+    script += replacements;
     filter.write(encoder.encode(script));
     filter.close();
   };
