@@ -1,4 +1,4 @@
-# Dreaming Spanish Extension
+# Dreaming Spanish Firefox Extension
 
 This extension displays the video difficulty ratings on the Watch page, Library
 page, and the Series pages.
