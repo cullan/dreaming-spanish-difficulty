@@ -10,7 +10,8 @@ async function replacementSrc() {
     'replacements/SeriesContinueWatching.js',
     'replacements/SeriesCatalogs.js',
     'replacements/SeriesModal.js',
-    'replacements/SeriesCarousel.js'
+    'replacements/SeriesCarousel.js',
+    'replacements/MyListSeries.js'
   ];
 
   const promises = fileNames.map(readFile);
