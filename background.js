@@ -1,13 +1,16 @@
 async function patchSrc() {
   fileNames = [
     'VideoThumbnail.js',
+    'VideoSection.js',
+    'VideoCard.js',
+    'CatalogVideoCard.js',
+    'EpisodeCard.js',
     'seriesDifficultyRange.js',
     'SeriesCard.js',
     'SeriesContinueWatching.js',
     'SeriesCatalogs.js',
     'SeriesModal.js',
-    'SeriesCarousel.js',
-    'VideoSection.js'
+    'SeriesCarousel.js'
   ];
 
   const promises = fileNames.map(readFile);

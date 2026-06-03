@@ -2,7 +2,7 @@ VideoThumbnail = (s) => {
   const {
     video: l,
     watchedVideos: p,
-    showDifficulty: _m
+    showDifficulty: m
   }
     = s,
     [
@@ -12,7 +12,6 @@ VideoThumbnail = (s) => {
     C = `${ CLOUDFRONT_URL }/${ l._id }.jpg`,
     T = p[l._id],
     R = percentage(l.duration - (l.endCutout ?? 0), T?.watchPosition);
-  const m = true;
   return reactExports.createElement(
     reactExports.Fragment,
     null,
@@ -43,23 +42,6 @@ VideoThumbnail = (s) => {
               icon: 'thick-lock'
             }
           )
-        ),
-      m &&
-        reactExports.createElement(
-          'div',
-          {
-            className: 'ds-badge ds-badge--sm ds-badge--gray-80 ds-video-thumbnail__badge ds-video-thumbnail__badge--vocab-range',
-            onMouseEnter: () => b(!0),
-            onMouseLeave: () => b(!1)
-          },
-          reactExports.createElement(
-            IconMoon,
-            {
-              style: {height: "10px", width: "10px", "margin-right": "0.25rem"},
-              icon: "thick-difficulty"
-            }
-          ),
-          calculateDifficulty(l.difficultyScore)
         ),
       reactExports.createElement(
         'div',
