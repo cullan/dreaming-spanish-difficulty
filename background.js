@@ -3,6 +3,7 @@ async function replacementSrc() {
     'replacements/VideoThumbnail.js',
     'replacements/VideoSection.js',
     'replacements/VideoCard.js',
+    'replacements/VideoHorizontalCard.js',
     'replacements/CatalogVideoCard.js',
     'replacements/EpisodeCard.js',
     'replacements/seriesDifficultyRange.js',
