@@ -5,5 +5,5 @@
 
 VERSION=$(git describe --tags --abbrev=0)
 
-zip -r -FS ../dreaming-spanish-difficulty-"$VERSION".zip \
+zip -r -FS ../dreaming-ui-enhancement-"$VERSION".zip \
     -x "*.git*" -x "scripts/*" -x "screenshots/*" -- *
