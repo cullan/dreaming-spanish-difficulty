@@ -2,6 +2,8 @@ async function replacementSrc() {
   fileNames = [
     // new functions
     'replacements/seriesDifficultyRange.js', // calculate difficulty range of a series
+    // edited functions
+    'replacements/processWatchedSeries.js', // determines which series show up in continue watching
     // new components
     'replacements/SeriesDifficultyBadgeOverlay.js', // difficulty range for a series in corner overlay
     'replacements/VideoDifficultyBadge.js', // difficulty badge for video cards
