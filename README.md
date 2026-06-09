@@ -20,10 +20,12 @@ replacing the original ones.
 
 [watch page](screenshots/watch-page.jpg)
 
-[series page](screenshots/series-page.jpg)
+[series page](screenshots/series-progress.jpg)
 
 [series detail page](screenshots/series-details.jpg)
 
 [watching a video](screenshots/playing-a-video.jpg)
 
 [library page](screenshots/library.jpg)
+
+[series level page](screenshots/series-level-page.jpg)
