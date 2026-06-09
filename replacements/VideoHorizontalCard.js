@@ -1,4 +1,4 @@
-VideoHorizontalCard = (s) => {
+VideoHorizontalCard = (u) => {
   const {
     video: l,
     userState: p,
@@ -9,9 +9,18 @@ VideoHorizontalCard = (s) => {
     lastWatched: T,
     options: R
   }
-    = s,
-    N = l.publishedAt ? new Date(l.publishedAt) : void 0;
-  const difficulty = calculateDifficulty(l.difficultyScore || 0);
+    = u,
+    {
+      matches: {
+        maxWidth991: D
+      }
+    }
+      = useMediaQueries({
+        maxWidth991: '(max-width: 991px)'
+    }),
+    N = C ||
+      D,
+    F = l.publishedAt ? new Date(l.publishedAt) : void 0;
   return reactExports.createElement(
     reactExports.Fragment,
     null,
@@ -29,7 +38,7 @@ VideoHorizontalCard = (s) => {
       reactExports.createElement(
         'div',
         {
-          className: `ds-video-horizontal-card__content 
+          className: `ds-video-horizontal-card__content
             
             ${ C ? 'ds-video-horizontal-card__content--compact' : '' }
           
@@ -45,81 +54,27 @@ VideoHorizontalCard = (s) => {
             {
               className: 'ds-video-horizontal-card__header-group'
             },
-            reactExports.createElement(
-              'div',
-              {
-                className: `ds-badge ds-badge--sm ds-video-horizontal-card__badge 
-                ds-badge--level-${ l.level }-special
-                  `
-              },
-              reactExports.createElement(
-                LevelIcon,
-                {
-                  level: l.level,
-                  className: `ds-badge__image ds-badge__image--sm 
-                    
-                    ${ C ? '' : 'ds-badge__image--left' }
-                  
-                    `
-                }
-              ),
-              !C &&
-                reactExports.createElement(
-                  'p',
-                  {
-                    className: 'ds-video-horizontal-card__badge-label ds-text-capitalize-first'
-                  },
-                  l.level
-                )
-            ),
-            reactExports.createElement(
-              'div',
-              {
-                className: 'ds-badge ds-badge--sm ds-badge--alternative'
-              },
-              reactExports.createElement(
-                IconMoon,
-                {
-                  style: {
-                    height: '10px',
-                    width: '10px',
-                    'margin-right': '0.25rem'
-                  },
-                  icon: 'thick-difficulty'
-                }
-              ),
-              difficulty,
-            ),
+            reactExports.createElement(LevelBadge, {
+              level: l.level,
+              hideLabel: N
+            }),
             l.private &&
               reactExports.createElement(
-                'div',
+                Badge,
                 {
-                  className: 'ds-badge ds-badge--sm ds-badge--secondary-alternative ds-video-horizontal-card__badge'
+                  variant: 'secondary-alternative',
+                  size: 'sm',
+                  startIcon: 'thick-star'
                 },
-                reactExports.createElement(
-                  IconMoon,
-                  {
-                    className: `ds-badge__icon ds-badge__icon--sm ${ C ? '' : 'ds-badge__icon--left' }`,
-                    icon: 'thick-star'
-                  }
-                ),
-                !C &&
-                  reactExports.createElement(
-                    'p',
-                    {
-                      className: 'ds-video-horizontal-card__badge-label'
-                    },
-                    'Premium'
-                  )
+                reactExports.createElement('span', {
+                  className: N ? 'sr-only' : void 0
+                }, 'Premium')
               ),
             (l.tags.includes('+18') || l.tags.includes('18+')) &&
-              reactExports.createElement(
-                'div',
-                {
-                  className: 'ds-badge ds-badge--sm ds-badge--error-alternative ds-video-horizontal-card__badge ds-video-horizontal-card__badge--18'
-                },
-                '18+'
-              )
+              reactExports.createElement(Badge, {
+                variant: 'error-alternative',
+                size: C ? 'xs' : 'sm'
+              }, '18+')
           ),
           reactExports.createElement(
             VideoOptions,
@@ -129,7 +84,7 @@ VideoHorizontalCard = (s) => {
               watchedVideos: m,
               playlistItems: y,
               options: R,
-              cssClass: `ds-video-horizontal-card__video-options 
+              cssClass: `ds-video-horizontal-card__video-options
                 
                 ${ C ? 'ds-video-horizontal-card__video-options--compact' : '' }
               
@@ -145,11 +100,12 @@ VideoHorizontalCard = (s) => {
           reactExports.createElement(
             'p',
             {
-              className: `ds-video-horizontal-card__title 
+              className: `ds-video-horizontal-card__title
                 
                 ${ C ? 'ds-video-horizontal-card__title--compact' : '' }
               
-                `
+                `,
+              title: l.title
             },
             l.title
           ),
@@ -163,7 +119,7 @@ VideoHorizontalCard = (s) => {
               l.description
             ),
           !C &&
-            N &&
+            F &&
             !T &&
             reactExports.createElement(
               'p',
@@ -178,7 +134,7 @@ VideoHorizontalCard = (s) => {
                 }
               ),
               'Published on: ',
-              dateToYYMMDD(N)
+              dateToYYMMDD(F)
             ),
           !C &&
             T &&
@@ -203,4 +159,4 @@ VideoHorizontalCard = (s) => {
       )
     )
   )
-}
+};

@@ -1,10 +1,10 @@
-SeriesCatalog = (s) => {
+SeriesCatalog = (u) => {
   const {
     level: l,
     series: p,
     seriesDataItems: m
   }
-    = s,
+    = u,
     {
       language: y
     }
@@ -16,19 +16,19 @@ SeriesCatalog = (s) => {
     ] = reactExports.useState({
     }),
     R = reactExports.useMemo(
-      () => l ? p.filter(L => L.level === l).sort((L, G) => G.publishedAt.localeCompare(L.publishedAt)) : p,
+      () => l ? p.filter(O => O.level === l).filter(isPublishedSeries).sort((O, q) => (q.publishedAt ?? '').localeCompare(O.publishedAt ?? '')) : p,
       [
         l,
         p
       ]
     ),
-    N = reactExports.useCallback(
-      L => {
+    D = reactExports.useCallback(
+      O => {
         b.push(getUrl({
           path: SERIES,
           language: y,
           params: {
-            id: L._id
+            id: O._id
           }
         }))
       },
@@ -37,19 +37,19 @@ SeriesCatalog = (s) => {
         y
       ]
     ),
-    O = reactExports.useCallback(L => {
-      T(G => ({
-        ...G,
+    N = reactExports.useCallback(O => {
+      T(q => ({
+        ...q,
         [
-          L
+          O
         ]: !1
       }))
     }, []),
-    U = reactExports.useCallback(L => {
-      T(G => ({
-        ...G,
+    F = reactExports.useCallback(O => {
+      T(q => ({
+        ...q,
         [
-          L
+          O
         ]: !0
       }))
     }, []);
@@ -72,55 +72,37 @@ SeriesCatalog = (s) => {
           }),
           slideClass: 'ds-series-catalog__slide',
           elements: R,
-          onClick: N,
-          onRender: (L, G, M, V) => {
-            const Z = `${ CLOUDFRONT_URL }/series-${ L._id }-vertical.jpg`,
-              H = m[L._id];
-            const [minDifficulty, maxDifficulty] = seriesDifficultyRange(H);
-            return V === void 0 ? reactExports.createElement(reactExports.Fragment, null) : reactExports.createElement(
+          onClick: D,
+          onRender: (O, q, P, G) => {
+            const J = m[O._id];
+            return G === void 0 ? reactExports.createElement(reactExports.Fragment, null) : reactExports.createElement(
               'div',
               {
                 className: 'ds-series-catalog__card',
                 'data-testid': 'series-catalog-card'
               },
               reactExports.createElement(
-                Image$1,
+                SeriesArtwork,
                 {
-                  type: G < M + 2 * Math.ceil(V) ? 'standard' : 'lazy',
-                  src: Z,
-                  alt: L.title,
+                  type: q < P + 2 * Math.ceil(G) ? 'standard' : 'lazy',
+                  series: O,
+                  kind: 'vertical',
+                  alt: O.title,
                   className: 'ds-series-catalog__image',
-                  loading: G < M + 2 * Math.ceil(V) ? 'eager' : 'lazy',
-                  onLoad: () => O(L._id),
-                  onError: () => U(L._id)
+                  loading: q < P + 2 * Math.ceil(G) ? 'eager' : 'lazy',
+                  onLoad: () => N(O._id),
+                  onError: () => F(O._id)
                 }
               ),
-              !H?.locked &&
+              !J?.locked &&
                 reactExports.createElement('div', {
                   className: 'ds-series-catalog__overlay'
                 }),
-              C[L._id] &&
+              C[O._id] &&
                 reactExports.createElement('div', {
                   className: 'ds-series-catalog__title-overlay'
-                }, L.title),
-              reactExports.createElement(
-                'div',
-                {
-                  className: 'ds-badge ds-badge--sm ds-badge--gray-80 ds-video-thumbnail__badge ds-video-thumbnail__badge--vocab-range',
-                },
-                reactExports.createElement(
-                  IconMoon,
-                  {
-                    style: {
-                      height: '10px',
-                      width: '10px',
-                      'margin-right': '0.25rem'
-                    },
-                    icon: 'thick-difficulty'
-                  }
-                ),`${minDifficulty}-${maxDifficulty}`
-              ),
-              H?.locked &&
+                }, O.title),
+              J?.locked &&
                 reactExports.createElement(
                   'div',
                   {
@@ -140,4 +122,4 @@ SeriesCatalog = (s) => {
       )
     )
   )
-}
+};

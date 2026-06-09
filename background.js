@@ -1,18 +1,20 @@
 async function replacementSrc() {
   fileNames = [
-    'replacements/VideoThumbnail.js',
-    'replacements/VideoSection.js',
-    'replacements/VideoCard.js',
-    'replacements/VideoHorizontalCard.js',
-    'replacements/CatalogVideoCard.js',
-    'replacements/EpisodeCard.js',
-    'replacements/seriesDifficultyRange.js',
-    'replacements/SeriesCard.js',
-    'replacements/SeriesContinueWatching.js',
-    'replacements/SeriesCatalogs.js',
-    'replacements/SeriesModal.js',
-    'replacements/SeriesCarousel.js',
-    'replacements/MyListSeries.js'
+    // functions
+    'replacements/seriesDifficultyRange.js', // calculate difficulty range of a series
+    // components
+    'replacements/CatalogVideoCard.js', // video cards on library page
+    'replacements/EpisodeCard.js', // video card on series detail page
+    'replacements/MyListSeries.js', // series cards on library page
+    'replacements/SeriesCard.js', // series cards on series pages (Series -> level)
+    'replacements/SeriesCarousel.js', // large series carousel on top of series page
+    'replacements/SeriesCatalogs.js', // series cards on series page
+    'replacements/SeriesContinueWatching.js', // continue watching cards on series page
+    'replacements/SeriesModal.js', // series detail page
+    'replacements/VideoCard.js', // videos on library page
+    'replacements/VideoHorizontalCard.js', // videos on library -> history page
+    'replacements/VideoSection.js', // playing a video
+    'replacements/VideoThumbnail.js', // video thumbnails with overlay
   ];
 
   const promises = fileNames.map(readFile);

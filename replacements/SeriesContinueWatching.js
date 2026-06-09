@@ -1,10 +1,10 @@
-SeriesContinueWatching = (s) => {
+SeriesContinueWatching = (u) => {
   const {
     series: l,
     seriesDataItems: p,
     watchedVideos: m
   }
-    = s,
+    = u,
     {
       language: y
     }
@@ -16,14 +16,14 @@ SeriesContinueWatching = (s) => {
     ] = reactExports.useState({
     }),
     R = reactExports.useCallback(
-      U => {
+      F => {
         console.log(
           'going to',
           getUrl({
             path: WATCH,
             language: y,
             params: {
-              series: U._id
+              series: F._id
             }
           })
         ),
@@ -31,7 +31,7 @@ SeriesContinueWatching = (s) => {
           path: WATCH,
           language: y,
           params: {
-            series: U._id
+            series: F._id
           }
         }))
       },
@@ -40,19 +40,19 @@ SeriesContinueWatching = (s) => {
         y
       ]
     ),
-    N = reactExports.useCallback(U => {
-      T(L => ({
-        ...L,
+    D = reactExports.useCallback(F => {
+      T(O => ({
+        ...O,
         [
-          U
+          F
         ]: !1
       }))
     }, []),
-    O = reactExports.useCallback(U => {
-      T(L => ({
-        ...L,
+    N = reactExports.useCallback(F => {
+      T(O => ({
+        ...O,
         [
-          U
+          F
         ]: !0
       }))
     }, []);
@@ -67,11 +67,9 @@ SeriesContinueWatching = (s) => {
         slideClass: 'ds-series-continue-watching__slide',
         elements: l,
         onClick: R,
-        onRender: (U, L, G, M) => {
-          const V = `${ CLOUDFRONT_URL }/series-${ U._id }-horizontal.jpg`,
-            Z = p[U._id];
-          const [minDifficulty, maxDifficulty] = seriesDifficultyRange(Z);
-          return M === void 0 ? reactExports.createElement(reactExports.Fragment, null) : reactExports.createElement(
+        onRender: (F, O, q, P) => {
+          const G = p[F._id];
+          return P === void 0 ? reactExports.createElement(reactExports.Fragment, null) : reactExports.createElement(
             reactExports.Fragment,
             null,
             reactExports.createElement(
@@ -80,30 +78,31 @@ SeriesContinueWatching = (s) => {
                 className: 'ds-series-continue-watching__card'
               },
               reactExports.createElement(
-                Image$1,
+                SeriesArtwork,
                 {
-                  type: L < G + 2 * Math.ceil(M) ? 'standard' : 'lazy',
-                  src: V,
-                  alt: U.title,
+                  type: O < q + 2 * Math.ceil(P) ? 'standard' : 'lazy',
+                  series: F,
+                  kind: 'horizontal',
+                  alt: F.title,
                   className: 'ds-series-continue-watching__image',
-                  loading: L < G + 2 * Math.ceil(M) ? 'eager' : 'lazy',
-                  onLoad: () => N(U._id),
-                  onError: () => O(U._id)
+                  loading: O < q + 2 * Math.ceil(P) ? 'eager' : 'lazy',
+                  onLoad: () => D(F._id),
+                  onError: () => N(F._id)
                 }
               ),
               reactExports.createElement('div', {
                 className: 'ds-series-continue-watching__overlay'
               }),
-              C[U._id] &&
+              C[F._id] &&
                 reactExports.createElement(
                   'div',
                   {
                     className: 'ds-series-continue-watching__title-overlay'
                   },
-                  U.title
+                  F.title
                 ),
-              Z?.locked &&
-                !C[U._id] &&
+              G?.locked &&
+                !C[F._id] &&
                 reactExports.createElement(
                   'div',
                   {
@@ -117,31 +116,14 @@ SeriesContinueWatching = (s) => {
                     }
                   )
                 ),
-              reactExports.createElement(
-                'div',
-                {
-                  className: 'ds-badge ds-badge--sm ds-badge--gray-80 ds-video-thumbnail__badge ds-video-thumbnail__badge--vocab-range',
-                },
-                reactExports.createElement(
-                  IconMoon,
-                  {
-                    style: {
-                      height: '10px',
-                      width: '10px',
-                      'margin-right': '0.25rem'
-                    },
-                    icon: 'thick-difficulty'
-                  }
-                ),`${minDifficulty}-${maxDifficulty}`
-              ),
-              !Z?.locked &&
-                !C[U._id] &&
+              !G?.locked &&
+                !C[F._id] &&
                 reactExports.createElement(
                   'button',
                   {
                     type: 'button',
                     className: 'ds-series-continue-watching__play-button',
-                    'aria-label': `Reproducir ${ U.title }`
+                    'aria-label': `Reproducir ${ F.title }`
                   },
                   reactExports.createElement(
                     IconMoon,
@@ -157,22 +139,22 @@ SeriesContinueWatching = (s) => {
               {
                 className: 'ds-series-continue-watching__episode-progress'
               },
-              Z?.episodes.map(
-                (H, Q) => {
-                  const J = m[H._id],
-                    ee = percentage(H.duration - (H.endCutout ?? 0), J?.watchPosition ?? 0);
+              G?.episodes.map(
+                (J, $) => {
+                  const K = m[J._id],
+                    Q = percentage(J.duration - (J.endCutout ?? 0), K?.watchPosition ?? 0);
                   return reactExports.createElement(
                     ProgressBar$1,
                     {
-                      key: H._id,
+                      key: J._id,
                       className: `ds-progress-bar ds-progress-bar--no-border ds-progress-bar--success
                         
-                        ${ Q === 0 ? 'ds-progress-bar--border-left' : '' }
+                        ${ $ === 0 ? 'ds-progress-bar--border-left' : '' }
                         
-                        ${ Q === Z.episodes.length - 1 ? 'ds-progress-bar--border-right' : '' }
+                        ${ $ === G.episodes.length - 1 ? 'ds-progress-bar--border-right' : '' }
                       
                         `,
-                      now: ee
+                      now: Q
                     }
                   )
                 }
@@ -183,4 +165,4 @@ SeriesContinueWatching = (s) => {
       }
     )
   )
-}
+};

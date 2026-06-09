@@ -1,11 +1,11 @@
-SeriesModal = (s) => {
+SeriesModal = (u) => {
   const {
     show: l,
     series: p,
     seriesDataItem: m,
     closeCallback: y
   }
-    = s,
+    = u,
     {
       getColor: b
     }
@@ -19,29 +19,29 @@ SeriesModal = (s) => {
       languageName: R
     }
       = useLanguage(),
-    N = useUserState(),
-    O = useGetAllPlaylist({
+    D = useUserState(),
+    N = useGetAllPlaylist({
       language: T
     }),
-    U = useGetAllWatchedVideos({
+    F = useGetAllWatchedVideos({
       language: T
     }),
-    L = useAddToPlaylist(),
-    G = useDeleteFromPlaylist({
+    O = useAddToPlaylist(),
+    q = useDeleteFromPlaylist({
       language: T
     }),
     [
-      M,
-      V
+      P,
+      G
     ] = reactExports.useState(!1),
     [
-      Z,
-      H
+      J,
+      $
     ] = reactExports.useState(!1),
-    Q = reactExports.useCallback(
-      gr => {
-        L.mutate({
-          seriesId: gr._id,
+    K = reactExports.useCallback(
+      ir => {
+        O.mutate({
+          seriesId: ir._id,
           addedDate: new Date,
           language: T
         }),
@@ -51,69 +51,69 @@ SeriesModal = (s) => {
         })
       },
       [
-        L,
+        O,
         T
       ]
     ),
-    J = reactExports.useCallback(
-      gr => {
-        G.mutate(gr),
+    Q = reactExports.useCallback(
+      ir => {
+        q.mutate(ir),
         actionToast$.next({
           type: 'error',
           content: 'Removed from my list.'
         })
       },
       [
-        G
+        q
       ]
     );
   reactExports.useEffect(() => {
-    l ? V(!0) : (V(!1), H(!1))
+    l ? G(!0) : (G(!1), $(!1))
   }, [
     l
   ]),
     reactExports.useEffect(
       () => {
-        if (Z) {
-          const gr = setTimeout(() => y(), 200);
-          return () => clearTimeout(gr)
+        if (J) {
+          const ir = setTimeout(() => y(), 200);
+          return () => clearTimeout(ir)
         }
       },
       [
-        Z,
+        J,
         y
       ]
     );
-  const [minDifficulty, maxDifficulty] = seriesDifficultyRange(m);
-  const ee = `${ CLOUDFRONT_URL }/series-${ p._id }-cover.jpg`,
-    oe = `${ CLOUDFRONT_URL }/series-${ p._id }-horizontal.jpg`,
-    Ve = O.data?.find(gr => gr.seriesId === p._id),
-    Ut = !Ve,
-    Vt = !!Ve;
-  let tr = 0,
-    Y = 0,
-    Xt = m.episodes.slice(),
-    er = 0;
-  Xt.forEach(
-    gr => {
-      if (tr += gr.duration - (gr.endCutout ?? 0), !U.data) return;
-      const or = U.data[gr._id];
-      or &&
-        (Y += or.watched ? gr.duration - (gr.endCutout ?? 0) : or.watchPosition)
+  const Z = N.data?.find(ir => ir.seriesId === p._id),
+    ne = !Z,
+    oe = !!Z;
+  let Qe = 0,
+    zt = 0,
+    Jt = m.episodes.slice(),
+    z = 0;
+  Jt.forEach(
+    ir => {
+      if (Qe += ir.duration - (ir.endCutout ?? 0), !F.data) return;
+      const Vt = F.data[ir._id];
+      Vt &&
+        (
+          zt += Vt.watched ? ir.duration - (ir.endCutout ?? 0) : Vt.watchPosition
+        )
     }
   );
-  const cr = Xt.length;
-  p.numberOfEpisodes > cr &&
-    (er = p.numberOfEpisodes - cr);
-  const sr = percentage(100, Y / tr * 100, !0),
-    ar = reactExports.createElement(
+  const Qt = Jt.length;
+  p.numberOfEpisodes > Qt &&
+    (z = p.numberOfEpisodes - Qt);
+  const er = percentage(100, zt / Qe * 100, !0),
+    cr = reactExports.createElement(
       reactExports.Fragment,
       null,
       reactExports.createElement(
-        Image$1,
+        SeriesArtwork,
         {
           type: 'lazy',
-          src: ee,
+          series: p,
+          kind: 'cover',
           alt: p.title,
           className: 'ds-series-modal__cover'
         }
@@ -134,37 +134,9 @@ SeriesModal = (s) => {
           {
             className: 'ds-series-modal__information'
           },
-          reactExports.createElement(
-            'div',
-            {
-              className: `ds-badge ds-badge--sm ds-video-card__badge ds-badge--level-${ p.level }-special`
-            },
-            reactExports.createElement(
-              LevelIcon,
-              {
-                level: p.level,
-                className: 'ds-badge__image ds-badge__image--sm ds-badge__image--left'
-              }
-            ),
-            reactExports.createElement('span', {
-              className: 'ds-text-capitalize-first'
-            }, p.level)
-          ),
-          reactExports.createElement(
-            'p',
-            {
-              className: 'ds-series-modal__information-label'
-            },
-            reactExports.createElement(
-              IconMoon,
-              {
-                className: 'ds-series-modal__information-icon',
-                style: {'margin-right': '0.25rem'},
-                icon: 'thick-difficulty'
-              }
-            ),
-            `${minDifficulty}-${maxDifficulty}`,
-          ),
+          reactExports.createElement(LevelBadge, {
+            level: p.level
+          }),
           reactExports.createElement(
             IconMoon,
             {
@@ -177,7 +149,7 @@ SeriesModal = (s) => {
             {
               className: 'ds-series-modal__information-label'
             },
-            Xt.length,
+            Jt.length,
             ' Episode(s) • ',
             secondsToHM(m.duration)
           )
@@ -192,7 +164,7 @@ SeriesModal = (s) => {
             {
               className: 'ds-series-modal__doughnut-progress'
             },
-            sr,
+            er,
             '%',
             reactExports.createElement(
               'small',
@@ -205,7 +177,7 @@ SeriesModal = (s) => {
           reactExports.createElement(
             DoughnutChart,
             {
-              progress: sr,
+              progress: er,
               backgroundColor: alpha(C, 0.2),
               progressColor: C
             }
@@ -237,13 +209,13 @@ SeriesModal = (s) => {
             ),
             'Play'
           ),
-          Ut &&
+          ne &&
             reactExports.createElement(
               'button',
               {
                 type: 'button',
                 className: 'btn ds-button ds-button--lg ds-button--white',
-                onClick: () => Q(p)
+                onClick: () => K(p)
               },
               reactExports.createElement(
                 IconMoon,
@@ -255,14 +227,14 @@ SeriesModal = (s) => {
               ),
               'Add to my list'
             ),
-          Vt &&
+          oe &&
             reactExports.createElement(
               'button',
               {
                 type: 'button',
                 className: 'btn ds-button ds-button--lg ds-button--white',
-                onClick: () => Ve &&
-                  J(Ve)
+                onClick: () => Z &&
+                  Q(Z)
               },
               reactExports.createElement(
                 IconMoon,
@@ -276,7 +248,7 @@ SeriesModal = (s) => {
         )
       )
     ),
-    zt = reactExports.createElement(
+    sr = reactExports.createElement(
       reactExports.Fragment,
       null,
       reactExports.createElement(
@@ -289,14 +261,14 @@ SeriesModal = (s) => {
           {
             className: 'ds-series-modal__progress-label'
           },
-          sr,
+          er,
           '% watched'
         ),
         reactExports.createElement(
           ProgressBar$1,
           {
             className: 'ds-progress-bar ds-progress-bar--secondary',
-            now: sr
+            now: er
           }
         )
       ),
@@ -308,49 +280,46 @@ SeriesModal = (s) => {
         {
           className: 'ds-series-modal__grid'
         },
-        Xt.map(
-          gr => !N.data ||
-            !U.data ||
-            !O.data ? reactExports.createElement('div', {
-              key: gr._id
+        Jt.map(
+          ir => !D.data ||
+            !F.data ||
+            !N.data ? reactExports.createElement('div', {
+              key: ir._id
           }) : reactExports.createElement(
             'div',
             {
-              key: gr._id,
+              key: ir._id,
               className: 'ds-series-modal__video'
             },
             reactExports.createElement(
               Link,
               {
-                to: buildLinkTo$1(p, gr)
+                to: buildLinkTo$1(p, ir)
               },
               reactExports.createElement(
                 EpisodeCard,
                 {
-                  video: gr,
-                  userState: N.data,
-                  watchedVideos: U.data,
-                  playlistItems: O.data,
+                  video: ir,
+                  userState: D.data,
+                  watchedVideos: F.data,
+                  playlistItems: N.data,
                   showDifficulty: !1
                 }
               )
             )
           )
         ),
-        lodashExports.times(er).map(
-          gr => reactExports.createElement(
+        lodashExports.times(z).map(
+          ir => reactExports.createElement(
             'div',
             {
-              key: gr,
+              key: ir,
               className: 'ds-series-modal__video'
             },
-            reactExports.createElement(
-              ComingSoonCard,
-              {
-                episodeNumber: gr + 1 + Xt.length,
-                thumbnailUrl: oe
-              }
-            )
+            reactExports.createElement(ComingSoonCard, {
+              episodeNumber: ir + 1 + Jt.length,
+              series: p
+            })
           )
         )
       )
@@ -386,7 +355,7 @@ SeriesModal = (s) => {
           'meta',
           {
             property: 'og:image',
-            content: `${ CLOUDFRONT_URL }/series-${ p._id }-horizontal.jpg`
+            content: getSeriesArtworkUrl(p._id, 'horizontal')
           }
         ),
         reactExports.createElement(
@@ -410,7 +379,7 @@ SeriesModal = (s) => {
         {
           className: 'ds-modal__header'
         },
-        ar,
+        cr,
         reactExports.createElement(
           'button',
           {
@@ -419,15 +388,18 @@ SeriesModal = (s) => {
             onClick: () => y(),
             'aria-label': 'Close modal'
           },
-          reactExports.createElement(IconMoon, {
-            className: 'ds-modal__close',
-            icon: 'line-close'
-          })
+          reactExports.createElement(
+            IconMoon,
+            {
+              className: 'ds-modal__close-icon',
+              icon: 'line-close'
+            }
+          )
         )
       ),
       reactExports.createElement(Modal.Body, {
         className: 'ds-modal__body'
-      }, zt)
+      }, sr)
     ),
     l &&
       reactExports.createElement(
@@ -435,9 +407,9 @@ SeriesModal = (s) => {
         {
           className: `ds-series-modal ds-series-modal--mobile ds-animation
             
-          ${ M ? ' ds-fade-in-right' : '' }
+          ${ P ? ' ds-fade-in-right' : '' }
             
-          ${ Z ? ' ds-fade-out-right' : '' }
+          ${ J ? ' ds-fade-out-right' : '' }
           
           `,
           role: 'dialog',
@@ -448,13 +420,13 @@ SeriesModal = (s) => {
           {
             className: 'ds-series-modal__header'
           },
-          ar,
+          cr,
           reactExports.createElement(
             'button',
             {
               type: 'button',
               className: 'ds-series-modal__close-button',
-              onClick: () => H(!0),
+              onClick: () => $(!0),
               'aria-label': 'Close modal'
             },
             reactExports.createElement(
@@ -468,7 +440,7 @@ SeriesModal = (s) => {
         ),
         reactExports.createElement('div', {
           className: 'ds-series-modal__body'
-        }, zt)
+        }, sr)
       )
   )
-}
+};

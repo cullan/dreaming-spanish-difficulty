@@ -1,9 +1,9 @@
-SeriesCarousel = (s) => {
+SeriesCarousel = (u) => {
   const {
     series: l,
     seriesDataItems: p
   }
-    = s,
+    = u,
     {
       language: m
     }
@@ -34,10 +34,8 @@ SeriesCarousel = (s) => {
         },
         l.map(
           (T, R) => {
-            const N = `${ CLOUDFRONT_URL }/series-${ T._id }-cover.jpg`,
-              O = p[T._id],
-              U = shouldLoadImage(R, y, C);
-            const [minDifficulty, maxDifficulty] = seriesDifficultyRange(O);
+            const D = p[T._id],
+              N = shouldLoadImage(R, y, C);
             return reactExports.createElement(
               Carousel$1.Item,
               {
@@ -45,13 +43,14 @@ SeriesCarousel = (s) => {
                 className: 'ds-series-carousel__slide'
               },
               reactExports.createElement(
-                Image$1,
+                SeriesArtwork,
                 {
-                  type: U ? 'standard' : 'lazy',
-                  src: N,
+                  type: N ? 'standard' : 'lazy',
+                  series: T,
+                  kind: 'cover',
                   alt: T.title,
                   className: 'ds-series-carousel__cover',
-                  loading: U ? 'eager' : 'lazy'
+                  loading: N ? 'eager' : 'lazy'
                 }
               ),
               reactExports.createElement('div', {
@@ -70,31 +69,9 @@ SeriesCarousel = (s) => {
                   {
                     className: 'ds-series-carousel__information'
                   },
-                  reactExports.createElement(
-                    'div',
-                    {
-                      className: `ds-badge ds-badge--sm ds-video-card__badge ds-badge--level-${ T.level }-special`
-                    },
-                    reactExports.createElement(
-                      LevelIcon,
-                      {
-                        level: T.level,
-                        className: 'ds-badge__image ds-badge__image--sm ds-badge__image--left'
-                      }
-                    ),
-                    reactExports.createElement('span', {
-                      className: 'ds-text-capitalize-first'
-                    }, T.level)
-                  ),
-                  reactExports.createElement(
-                    IconMoon,
-                    {
-                      className: 'ds-series-modal__information-icon',
-                      style: {"margin-right": "-0.5rem"},
-                      icon: 'thick-difficulty'
-                    }
-                  ),
-                  `${minDifficulty}-${maxDifficulty}`,
+                  reactExports.createElement(LevelBadge, {
+                    level: T.level
+                  }),
                   reactExports.createElement(
                     'div',
                     {
@@ -107,15 +84,15 @@ SeriesCarousel = (s) => {
                         icon: 'thick-time'
                       }
                     ),
-                    O &&
+                    D &&
                       reactExports.createElement(
                         'p',
                         {
                           className: 'ds-series-carousel__information-duration-label'
                         },
-                        O.episodes.length,
+                        D.episodes.length,
                         ' Episode(s) • ',
-                        secondsToHM(O.duration)
+                        secondsToHM(D.duration)
                       )
                   )
                 ),
@@ -174,4 +151,4 @@ SeriesCarousel = (s) => {
       )
     )
   )
-}
+};

@@ -1,4 +1,4 @@
-MyListSeries = (s) => {
+MyListSeries = (u) => {
   const {
     language: l
   }
@@ -22,26 +22,26 @@ MyListSeries = (s) => {
       R
     ] = reactExports.useState(!1),
     [
-      N,
-      O
+      D,
+      N
     ] = reactExports.useState(),
     [
-      U,
-      L
+      F,
+      O
     ] = reactExports.useState(),
-    G = reactExports.useMemo(
+    q = reactExports.useMemo(
       () => !m.isFetched ||
         !m.data ||
-        !b ? [] : m.data.filter(V => !!V.seriesId).map(V => b[V.seriesId]).filter(V => !!V),
+        !b ? [] : m.data.filter(G => !!G.seriesId).map(G => b[G.seriesId]).filter(G => !!G),
       [
         m.isFetched,
         m.data,
         b
       ]
     ),
-    M = reactExports.useCallback(V => {
-      O(V),
-      L(C?.[V._id]),
+    P = reactExports.useCallback(G => {
+      N(G),
+      O(C?.[G._id]),
       R(!0)
     }, [
       C
@@ -67,13 +67,11 @@ MyListSeries = (s) => {
           }),
           emptyMessage: 'Your list has no series.',
           slideClass: 'ds-my-list-series__slide',
-          elements: G,
+          elements: q,
           max: 10,
-          onClick: M,
-          onRender: V => {
-            const Z = `${ CLOUDFRONT_URL }/series-${ V._id }-vertical.jpg`,
-              H = C?.[V._id];
-            const [minDifficulty, maxDifficulty] = seriesDifficultyRange(H);
+          onClick: P,
+          onRender: G => {
+            const J = C?.[G._id];
             return reactExports.createElement(
               'div',
               {
@@ -81,37 +79,20 @@ MyListSeries = (s) => {
                 'data-testid': 'library-series-card'
               },
               reactExports.createElement(
-                Image$1,
+                SeriesArtwork,
                 {
                   type: 'lazy',
-                  src: Z,
-                  alt: V.title,
+                  series: G,
+                  kind: 'vertical',
+                  alt: G.title,
                   className: 'ds-my-list-series__image'
                 }
               ),
-              !H?.locked &&
+              !J?.locked &&
                 reactExports.createElement('div', {
                   className: 'ds-my-list-series__overlay'
                 }),
-              reactExports.createElement(
-                'div',
-                {
-                  className: 'ds-badge ds-badge--sm ds-badge--gray-80 ds-video-thumbnail__badge ds-video-thumbnail__badge--vocab-range',
-                },
-                reactExports.createElement(
-                  IconMoon,
-                  {
-                    style: {
-                      height: '10px',
-                      width: '10px',
-                      'margin-right': '0.25rem'
-                    },
-                    icon: 'thick-difficulty'
-                  }
-                ),
-                `${minDifficulty}-${maxDifficulty}`
-              ),
-              H?.locked &&
+              J?.locked &&
                 reactExports.createElement(
                   'div',
                   {
@@ -130,16 +111,16 @@ MyListSeries = (s) => {
         }
       )
     ),
-    N &&
-      U &&
+    D &&
+      F &&
       reactExports.createElement(
         SeriesModal,
         {
           show: T,
-          series: N,
-          seriesDataItem: U,
+          series: D,
+          seriesDataItem: F,
           closeCallback: () => R(!1)
         }
       )
   )
-}
+};

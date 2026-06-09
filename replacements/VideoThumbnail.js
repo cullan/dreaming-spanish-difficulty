@@ -1,10 +1,10 @@
-VideoThumbnail = (s) => {
+VideoThumbnail = (u) => {
   const {
     video: l,
     watchedVideos: p,
     showDifficulty: m
   }
-    = s,
+    = u,
     [
       y,
       b
@@ -43,11 +43,25 @@ VideoThumbnail = (s) => {
             }
           )
         ),
+      m &&
+        reactExports.createElement(
+          Badge,
+          {
+            variant: 'overlay',
+            size: 'xs',
+            className: 'ds-video-thumbnail__badge ds-video-thumbnail__badge--vocab-range',
+            onMouseEnter: () => b(!0),
+            onMouseLeave: () => b(!1)
+          },
+          calculateDifficulty(l.difficultyScore)
+        ),
       reactExports.createElement(
         'div',
         {
-          className: `ds-video-thumbnail__vocab-tooltip 
+          className: `ds-video-thumbnail__vocab-tooltip
+            
             ${ y ? ' ds-video-thumbnail__vocab-tooltip--visible' : '' }
+          
             `
         },
         'Relative difficulty score from 0 to 100.'
@@ -62,31 +76,16 @@ VideoThumbnail = (s) => {
         ),
       l.duration > 0 &&
         reactExports.createElement(
-          'div',
+          Badge,
           {
-            className: 'ds-badge ds-badge--sm ds-badge--gray-80 ds-video-thumbnail__badge ds-video-thumbnail__badge--watched-duration'
+            variant: 'overlay',
+            size: 'xs',
+            className: 'ds-video-thumbnail__badge ds-video-thumbnail__badge--watched-duration',
+            startIcon: T?.watched ? 'thick-checked' : void 0
           },
-          reactExports.createElement(
-            'div',
-            {
-              className: 'ds-video-thumbnail__badge-content'
-            },
-            T?.watched &&
-              reactExports.createElement(
-                reactExports.Fragment,
-                null,
-                reactExports.createElement(
-                  IconMoon,
-                  {
-                    className: 'ds-video-thumbnail__badge-icon',
-                    icon: 'thick-checked'
-                  }
-                ),
-                reactExports.createElement('span', null, 'Watched'),
-                reactExports.createElement('span', null, '|')
-              ),
-            reactExports.createElement('span', null, durationToHHMMSS(l.duration - (l.endCutout ?? 0)))
-          )
+          T?.watched &&
+            'Watched | ',
+          durationToHHMMSS(l.duration - (l.endCutout ?? 0))
         )
     )
   )

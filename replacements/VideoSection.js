@@ -1,4 +1,4 @@
-VideoSection = (s) => {
+VideoSection = (u) => {
   const {
     language: l,
     video: p,
@@ -8,94 +8,93 @@ VideoSection = (s) => {
     videoA: C,
     videoB: T,
     autoplaySeconds: R,
-    autoplayCancelled: N,
-    series: O,
-    nextVideos: U,
-    displayType: L,
-    source: G,
-    playerReference: M,
-    showPlayer: V,
-    showPlayNext: Z,
-    showOverlay: H,
-    showComments: Q,
-    showPremiumMessage: J,
-    showBackgroundMessage: ee,
-    showPlaylist: oe,
-    onState: Ve,
-    onNextVideo: Ut,
-    onShowPlayer: Vt,
-    onShowOverlay: tr,
-    onCancelPlayNext: Y,
-    onShowComments: Xt,
+    autoplayCancelled: D,
+    series: N,
+    nextVideos: F,
+    displayType: O,
+    source: q,
+    playerReference: P,
+    showPlayer: G,
+    showPlayNext: J,
+    showOverlay: $,
+    showComments: K,
+    showPremiumMessage: Q,
+    showBackgroundMessage: Z,
+    showPlaylist: ne,
+    onState: oe,
+    onNextVideo: Qe,
+    onShowPlayer: zt,
+    onShowOverlay: Jt,
+    onCancelPlayNext: z,
+    onShowComments: Qt,
     onShowPremiumMessage: er,
     onShowBackgroundMessage: cr,
     onShowLoginModal: sr,
-    onMarkVideoAsWatched: ar,
-    onMarkVideoAsUnwatched: zt
+    onMarkVideoAsWatched: ir,
+    onMarkVideoAsUnwatched: Vt
   }
-    = s,
-    gr = useHistory(),
-    or = useLocation(),
+    = u,
+    mr = useHistory(),
+    ar = useLocation(),
     {
-      browseState: pr
+      browseState: dr
     }
       = reactExports.useContext(BrowseStateContext),
-    Cr = useOnline(),
-    Er = useInstalled(),
+    Ar = useOnline(),
+    xr = useInstalled(),
     {
-      dispatch: br
+      dispatch: Sr
     }
       = useSession(),
-    Rr = useUserState(),
-    $t = useGetAllVideos({
+    Tr = useUserState(),
+    qt = useGetAllVideos({
       language: l
     }),
-    vr = useGetAllWatchedVideos({
+    gr = useGetAllWatchedVideos({
       language: l
     }),
     Nr = usePremium({
       language: l
     }),
-    rn = usePlaylistVideo({
+    Ur = usePlaylistVideo({
       language: l
     }),
     [
-      Kr,
-      on
+      Yr,
+      an
     ] = reactExports.useState(),
     [
-      Lr,
-      Jr
+      Vr,
+      Zr
     ] = reactExports.useState(!1),
-    Dr = reactExports.useMemo(
+    Mr = reactExports.useMemo(
       () => {
-        if (!(!m || !p || !O) && p.seriesId && L !== 'series') return O.find(Wn => Wn._id === p.seriesId)
+        if (!(!m || !p || !N) && p.seriesId && O !== 'series') return N.find(Hn => Hn._id === p.seriesId)
       },
       [
         m,
         p,
-        O,
-        L
+        N,
+        O
       ]
     );
-  const difficulty = calculateDifficulty(s.video?.difficultyScore || 0);
-  let On = 'embed-responsive-16by9';
+  let In = 'embed-responsive-16by9';
   (!p || p.aspectRatio === '2:1') &&
-    (On = 'embed-responsive-2by1');
-  const mn = reactExports.useMemo(() => p?._id && `${ CLOUDFRONT_URL }/${ p._id }.jpg`, [
+    (In = 'embed-responsive-2by1');
+  const hn = reactExports.useMemo(() => p?._id && `${ CLOUDFRONT_URL }/${ p._id }.jpg`, [
     p?._id
   ]);
   reactExports.useEffect(
     () => {
       if (!new URLSearchParams(window.location.search).get('comments')) return;
       const kn = new URLSearchParams(window.location.search),
-        ni = new URLSearchParams(window.location.search);
-      ni.delete('comments'),
-        gr.replace({
+        ti = new URLSearchParams(window.location.search);
+      ti.delete('comments'),
+        mr.replace({
           pathname: window.location.pathname,
-          search: ni.toString()
+          search: ti.toString()
         }),
-        gr.push({
+        mr.push({
           pathname: window.location.pathname,
           search: kn.toString()
         })
@@ -104,9 +103,9 @@ VideoSection = (s) => {
   ),
     reactExports.useEffect(
       () => {
-        const Wn = new URLSearchParams(or.search).get('comments');
+        const Hn = new URLSearchParams(ar.search).get('comments');
         !p ||
-          !Wn ||
+          !Hn ||
           actionCommentsMobile$.next({
             show: !0,
             identifier: p._id,
@@ -116,7 +115,7 @@ VideoSection = (s) => {
           })
       },
       [
-        or,
+        ar,
         p
       ]
     );
@@ -124,52 +123,52 @@ VideoSection = (s) => {
     si = 200;
   reactExports.useEffect(
     () => {
-      let Wn = window.innerWidth,
+      let Hn = window.innerWidth,
         kn;
-      const ni = (Gn, Vn) => Gn > en &&
-        Vn <= en ||
-        Gn <= en &&
-          Vn > en;
-      function Mi() {
+      const ti = (Vn, qn) => Vn > en &&
+        qn <= en ||
+        Vn <= en &&
+          qn > en;
+      function Di() {
         clearTimeout(kn),
           kn = setTimeout(
             () => {
-              const Gn = window.innerWidth;
-              ni(Wn, Gn) &&
-                (Xt(!1), on(void 0)),
-              Wn = Gn
+              const Vn = window.innerWidth;
+              ti(Hn, Vn) &&
+                (Qt(!1), an(void 0)),
+              Hn = Vn
             },
             si
           )
       }
-      return window.addEventListener('resize', Mi),
-        window.addEventListener('orientationchange', Mi),
+      return window.addEventListener('resize', Di),
+        window.addEventListener('orientationchange', Di),
         () => {
           clearTimeout(kn),
-          window.removeEventListener('resize', Mi),
-          window.removeEventListener('orientationchange', Mi)
+          window.removeEventListener('resize', Di),
+          window.removeEventListener('orientationchange', Di)
         }
     },
     [
-      Xt,
-      on
+      Qt,
+      an
     ]
   );
-  const fi = p ? `${ window.location.origin }${ getUrl({
+  const di = p ? `${ window.location.origin }${ getUrl({
     path: WATCH,
     language: l,
     params: {
       id: p._id
     }
   }) }` : '',
-    _i = async() => {
+    yi = async() => {
       if (IS_MOBILE) try {
         await navigator.share({
           title: p?.title,
-          url: fi
+          url: di
         })
       } catch {
-      } else Jr(!0)
+      } else Zr(!0)
     };
   return reactExports.createElement(
     reactExports.Fragment,
@@ -179,7 +178,7 @@ VideoSection = (s) => {
       {
         className: `ds-video-section
           
-          ${ oe ? 'ds-video-section--collapse' : '' }
+          ${ ne ? 'ds-video-section--collapse' : '' }
         
           `,
         'data-testid': 'video-section'
@@ -207,10 +206,10 @@ VideoSection = (s) => {
               reactExports.createElement(
                 'div',
                 {
-                  className: `embed-responsive ${ On }`
+                  className: `embed-responsive ${ In }`
                 },
                 y &&
-                  Er &&
+                  xr &&
                   reactExports.createElement(
                     'div',
                     {
@@ -261,7 +260,7 @@ VideoSection = (s) => {
                     )
                   ),
                 y &&
-                  !Er &&
+                  !xr &&
                   reactExports.createElement(
                     'div',
                     {
@@ -291,12 +290,12 @@ VideoSection = (s) => {
                       {
                         className: 'ds-video-section__default'
                       },
-                      mn &&
+                      hn &&
                         reactExports.createElement(
                           'img',
                           {
                             className: 'ds-video-section__default-image',
-                            src: mn,
+                            src: hn,
                             alt: 'thumbnail',
                             'data-testid': 'video-thumbnail'
                           }
@@ -304,32 +303,32 @@ VideoSection = (s) => {
                       !p &&
                         reactExports.createElement(Spinner, null)
                     ),
-                    V &&
+                    G &&
                       reactExports.createElement(
                         reactExports.Fragment,
                         null,
-                        G === 'youtube' &&
+                        q === 'youtube' &&
                           reactExports.createElement(
                             YoutubePlayer,
                             {
-                              ref: M,
+                              ref: P,
                               video: p,
-                              onState: Ve,
+                              onState: oe,
                               'data-testid': 'video-youtube-player'
                             }
                           ),
-                        G === 'bunny' &&
-                          U &&
-                          U.length > 0 &&
+                        q === 'bunny' &&
+                          F &&
+                          F.length > 0 &&
                           reactExports.createElement(
                             ShakaPlayer,
                             {
-                              ref: M,
+                              ref: P,
                               video: p,
-                              displayType: L,
+                              displayType: O,
                               manifest: b,
-                              onState: Ve,
-                              onNext: Ut,
+                              onState: oe,
+                              onNext: Qe,
                               'data-testid': 'video-shaka-player'
                             }
                           )
@@ -337,12 +336,12 @@ VideoSection = (s) => {
                     reactExports.createElement(
                       PremiumMessage,
                       {
-                        show: J,
+                        show: Q,
                         loginCallback: () => {
-                          Vt(!0),
+                          zt(!0),
                           er(!1),
                           sr(!0),
-                          br({
+                          Sr({
                             type: 'SIGN_IN',
                             payload: {
                               isClosable: !1,
@@ -351,9 +350,9 @@ VideoSection = (s) => {
                           })
                         },
                         unlockNowCallback: () => {
-                          Vt(!0),
+                          zt(!0),
                           er(!1),
-                          gr.push(getUrl({
+                          mr.push(getUrl({
                             path: TRY_PREMIUM,
                             language: l
                           }))
@@ -363,9 +362,9 @@ VideoSection = (s) => {
                     reactExports.createElement(
                       BackgroundMessage,
                       {
-                        show: ee,
+                        show: Z,
                         continueCallback: () => {
-                          Vt(!0),
+                          zt(!0),
                           cr(!1)
                         }
                       }
@@ -373,24 +372,24 @@ VideoSection = (s) => {
                     reactExports.createElement(
                       VideoOverlay,
                       {
-                        show: H &&
-                          !J &&
-                          !ee,
-                        showPlayNext: Z,
+                        show: $ &&
+                          !Q &&
+                          !Z,
+                        showPlayNext: J,
                         videoA: C,
                         videoB: T,
                         autoplaySeconds: R,
-                        autoplayCancelled: N,
-                        onClose: () => tr(!1),
+                        autoplayCancelled: D,
+                        onClose: () => Jt(!1),
                         onPlay: () => {
-                          M.current?.play(),
-                          tr(!1)
+                          P.current?.play(),
+                          Jt(!1)
                         },
                         onNextVideo: () => {
-                          Ut(),
-                          tr(!1)
+                          Qe(),
+                          Jt(!1)
                         },
-                        cancelPlayNext: Y
+                        cancelPlayNext: z
                       }
                     )
                   )
@@ -398,7 +397,7 @@ VideoSection = (s) => {
             ),
             (!m || !p) &&
               !y &&
-              !oe &&
+              !ne &&
               reactExports.createElement(
                 'div',
                 {
@@ -413,12 +412,12 @@ VideoSection = (s) => {
                 {
                   className: `ds-video-section__information
                     
-                  ${ Q ||
-                    oe ? 'ds-video-section__information--hidden' : '' }
+                  ${ K ||
+                    ne ? 'ds-video-section__information--hidden' : '' }
                   
                   `
                 },
-                renderTitle(p, Rr.data, vr.data, rn, ar, zt, _i),
+                renderTitle(p, Tr.data, gr.data, Ur, ir, Vt, yi),
                 renderDescription(p.description),
                 reactExports.createElement(
                   'div',
@@ -426,35 +425,16 @@ VideoSection = (s) => {
                     className: 'ds-video-section__badges',
                     'data-testid': 'video-badges'
                   },
-                  renderLevel(pr, p.level, l),
-                  reactExports.createElement(
-                    'div',
-                    {
-                      className: 'ds-badge ds-badge--sm ds-badge--alternative'
-                    },
-                    reactExports.createElement(
-                      IconMoon,
-                      {
-                        style: {
-                          height: '10px',
-                          width: '10px',
-                          'margin-right': '0.25rem'
-                        },
-                        icon: 'thick-difficulty'
-                      }
-                    ),
-                    difficulty,
-                  ),
+                  renderLevel(dr, p.level, l),
                   renderPremium(p.private),
-                  renderCountries(pr, p.guides, $t.data?.guidesDictionary, l),
-                  renderGuides(pr, p.guides, l),
-                  renderTags(pr, p.tags, l)
+                  renderCountries(dr, p.guides, qt.data?.guidesDictionary, l),
+                  renderGuides(dr, p.guides, l),
+                  renderTags(dr, p.tags, l)
                 ),
                 renderPublishedOn(p.publishedAt),
-                renderSeriesRelated(Dr, p._id, l),
-                renderDownloadButtons(p),
+                renderSeriesRelated(Mr, p._id, l),
                 renderCommentsMobileButton({
-                  isOnline: Cr,
+                  isOnline: Ar,
                   videoId: p._id,
                   language: l
                 })
@@ -465,26 +445,26 @@ VideoSection = (s) => {
                 {
                   className: `ds-video-section__information
                     
-                  ${ oe ? 'ds-video-section__information--toggle' : '' }
+                  ${ ne ? 'ds-video-section__information--toggle' : '' }
                   
                   `
                 },
-                renderTitle(y, Rr.data, vr.data, rn, ar, zt, _i),
+                renderTitle(y, Tr.data, gr.data, Ur, ir, Vt, yi),
                 reactExports.createElement(
                   'div',
                   {
                     className: 'ds-video-section__badges'
                   },
-                  renderLevel(pr, y.level, l),
+                  renderLevel(dr, y.level, l),
                   renderPremium(y.private),
-                  renderCountries(pr, y.guides, $t.data?.guidesDictionary, l),
-                  renderGuides(pr, y.guides, l),
-                  renderTags(pr, y.tags, l)
+                  renderCountries(dr, y.guides, qt.data?.guidesDictionary, l),
+                  renderGuides(dr, y.guides, l),
+                  renderTags(dr, y.tags, l)
                 ),
                 renderPublishedOn(y.publishedAt),
                 p &&
                   renderCommentsMobileButton({
-                    isOnline: Cr,
+                    isOnline: Ar,
                     videoId: p._id,
                     language: l
                   })
@@ -492,7 +472,7 @@ VideoSection = (s) => {
           )
         )
       ),
-      !oe &&
+      !ne &&
         reactExports.createElement(
           Card,
           {
@@ -510,7 +490,7 @@ VideoSection = (s) => {
                 className: `
                 ds-card__content ds-video-section__card-comments-content
                   
-                ${ Q ? 'ds-video-section__card-comments-content--show' : '' }
+                ${ K ? 'ds-video-section__card-comments-content--show' : '' }
                 
                 `
               },
@@ -519,8 +499,8 @@ VideoSection = (s) => {
                 {
                   className: 'ds-video-section__card-comments-header',
                   onClick: () => {
-                    Xt(!Q && Cr),
-                    on(void 0)
+                    Qt(!K && Ar),
+                    an(void 0)
                   },
                   'data-testid': 'video-comments-button'
                 },
@@ -541,9 +521,9 @@ VideoSection = (s) => {
                     {
                       className: 'ds-video-section__card-comments-header-title'
                     },
-                    Q &&
-                      Kr ? reactExports.createElement('span', null, Kr) : reactExports.createElement('span', null, 'View comments'),
-                    !Cr &&
+                    K &&
+                      Yr ? reactExports.createElement('span', null, Yr) : reactExports.createElement('span', null, 'View comments'),
+                    !Ar &&
                       reactExports.createElement(OfflineModeMessage, null)
                   )
                 ),
@@ -552,7 +532,7 @@ VideoSection = (s) => {
                   {
                     className: 'ds-video-section__card-comments-header-right'
                   },
-                  (Q || Cr) &&
+                  (K || Ar) &&
                     reactExports.createElement(
                       IconMoon,
                       {
@@ -566,7 +546,7 @@ VideoSection = (s) => {
                       className: `
                       ds-video-section__card-comments-header-toggle-icon ds-video-section__card-comments-header-toggle-icon--down
                         
-                      ${ Q ? 'ds-video-section__card-comments-header-toggle-icon--toggle' : '' }
+                      ${ K ? 'ds-video-section__card-comments-header-toggle-icon--toggle' : '' }
                       
                       `,
                       icon: 'thick-arrow-down'
@@ -575,7 +555,7 @@ VideoSection = (s) => {
                 )
               ),
               p &&
-                Q &&
+                K &&
                 reactExports.createElement(
                   'div',
                   {
@@ -589,8 +569,9 @@ VideoSection = (s) => {
                       page: 'Watch',
                       title: p.title,
                       url: window.location.href,
-                      onCommentsCountChange: Wn => {
-                        on(Wn)
+                      videoLanguage: p.language,
+                      onCommentsCountChange: Hn => {
+                        an(Hn)
                       }
                     }
                   )
@@ -602,11 +583,11 @@ VideoSection = (s) => {
     reactExports.createElement(
       ShareModal,
       {
-        show: Lr,
-        videoUrl: fi,
+        show: Vr,
+        videoUrl: di,
         videoTitle: p?.title,
-        closeCallback: () => Jr(!1)
+        closeCallback: () => Zr(!1)
       }
     )
   )
-}
+};
