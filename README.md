@@ -1,7 +1,7 @@
-# Dreaming Spanish Firefox Extension
+# Dreaming UI Enhancement Firefox Extension
 
-This extension displays the video difficulty ratings on the Watch page, Library
-page, and the Series pages.
+Displays difficulty ratings and series watch progress in the Dreaming
+Spanish/Dreaming French user interface.
 
 The Dreaming Spanish web application has difficulty ratings gathered from user
 feedback. The ratings are not surfaced in the user interface unless the user
