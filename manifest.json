@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Dreaming UI Enhancement",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Enhance the UI for Dreaming with visible difficulty ratings and series watch progress",
   "developer": {
     "name": "Cullan Springstead",
