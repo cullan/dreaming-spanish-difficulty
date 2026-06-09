@@ -88,6 +88,7 @@ MyListSeries = (u) => {
                   className: 'ds-my-list-series__image'
                 }
               ),
+              reactExports.createElement(SeriesDifficultyBadgeOverlay, { episodes: J.episodes }),
               !J?.locked &&
                 reactExports.createElement('div', {
                   className: 'ds-my-list-series__overlay'

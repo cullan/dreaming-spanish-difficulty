@@ -72,6 +72,7 @@ SeriesCarousel = (u) => {
                   reactExports.createElement(LevelBadge, {
                     level: T.level
                   }),
+                  reactExports.createElement(SeriesDifficultyBadge, { episodes: D.episodes }),
                   reactExports.createElement(
                     'div',
                     {

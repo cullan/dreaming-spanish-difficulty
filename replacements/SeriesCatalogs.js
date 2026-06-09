@@ -98,6 +98,7 @@ SeriesCatalog = (u) => {
                 reactExports.createElement('div', {
                   className: 'ds-series-catalog__overlay'
                 }),
+              reactExports.createElement(SeriesDifficultyBadgeOverlay, { episodes: J.episodes }),
               C[O._id] &&
                 reactExports.createElement('div', {
                   className: 'ds-series-catalog__title-overlay'

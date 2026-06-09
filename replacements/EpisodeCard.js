@@ -63,6 +63,7 @@ EpisodeCard = (u) => {
             {
               className: 'ds-episode-card__badges'
             },
+            reactExports.createElement(VideoDifficultyBadge, { difficultyScore: l.difficultyScore }),
             l.private &&
               reactExports.createElement(
                 Badge,

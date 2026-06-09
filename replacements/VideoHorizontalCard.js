@@ -58,6 +58,7 @@ VideoHorizontalCard = (u) => {
               level: l.level,
               hideLabel: N
             }),
+            reactExports.createElement(VideoDifficultyBadge, { difficultyScore: l.difficultyScore }),
             l.private &&
               reactExports.createElement(
                 Badge,

@@ -37,6 +37,7 @@ SeriesCard = (u) => {
         reactExports.createElement('div', {
           className: 'ds-series-card__title-overlay'
         }, l.title),
+      reactExports.createElement(SeriesDifficultyBadgeOverlay, { episodes: p.episodes }),
       p.locked &&
         reactExports.createElement(
           'div',

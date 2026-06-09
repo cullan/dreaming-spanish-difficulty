@@ -426,6 +426,7 @@ VideoSection = (u) => {
                     'data-testid': 'video-badges'
                   },
                   renderLevel(dr, p.level, l),
+                  reactExports.createElement(VideoDifficultyBadge, { difficultyScore: p.difficultyScore }),
                   renderPremium(p.private),
                   renderCountries(dr, p.guides, qt.data?.guidesDictionary, l),
                   renderGuides(dr, p.guides, l),

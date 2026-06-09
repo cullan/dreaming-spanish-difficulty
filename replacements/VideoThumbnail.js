@@ -43,18 +43,6 @@ VideoThumbnail = (u) => {
             }
           )
         ),
-      m &&
-        reactExports.createElement(
-          Badge,
-          {
-            variant: 'overlay',
-            size: 'xs',
-            className: 'ds-video-thumbnail__badge ds-video-thumbnail__badge--vocab-range',
-            onMouseEnter: () => b(!0),
-            onMouseLeave: () => b(!1)
-          },
-          calculateDifficulty(l.difficultyScore)
-        ),
       reactExports.createElement(
         'div',
         {

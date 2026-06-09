@@ -63,6 +63,7 @@ VideoCard = (u) => {
             reactExports.createElement(LevelBadge, {
               level: l.level
             }),
+            reactExports.createElement(VideoDifficultyBadge, { difficultyScore: l.difficultyScore }),
             l.private &&
               reactExports.createElement(
                 Badge,

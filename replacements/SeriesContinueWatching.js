@@ -132,7 +132,8 @@ SeriesContinueWatching = (u) => {
                       icon: 'thick-play'
                     }
                   )
-                )
+                ),
+              reactExports.createElement(SeriesDifficultyBadgeOverlay, { episodes: G.episodes }),
             ),
             reactExports.createElement(
               'div',

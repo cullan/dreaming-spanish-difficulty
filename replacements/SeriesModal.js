@@ -137,6 +137,7 @@ SeriesModal = (u) => {
           reactExports.createElement(LevelBadge, {
             level: p.level
           }),
+          reactExports.createElement(SeriesDifficultyBadge, { episodes: m.episodes }),
           reactExports.createElement(
             IconMoon,
             {
