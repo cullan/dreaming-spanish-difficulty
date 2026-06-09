@@ -73,41 +73,15 @@ MyListSeries = (u) => {
           onRender: G => {
             const J = C?.[G._id];
             return reactExports.createElement(
-              'div',
+              SeriesCard,
               {
-                className: 'ds-my-list-series__card',
-                'data-testid': 'library-series-card'
-              },
-              reactExports.createElement(
-                SeriesArtwork,
-                {
-                  type: 'lazy',
-                  series: G,
-                  kind: 'vertical',
-                  alt: G.title,
-                  className: 'ds-my-list-series__image'
-                }
-              ),
-              reactExports.createElement(SeriesDifficultyBadgeOverlay, { episodes: J.episodes }),
-              !J?.locked &&
-                reactExports.createElement('div', {
-                  className: 'ds-my-list-series__overlay'
-                }),
-              J?.locked &&
-                reactExports.createElement(
-                  'div',
-                  {
-                    className: 'ds-my-list-series__premium-overlay'
-                  },
-                  reactExports.createElement(
-                    IconMoon,
-                    {
-                      className: 'ds-my-list-series__premium-icon',
-                      icon: 'thick-lock'
-                    }
-                  )
-                )
-            )
+                series: G,
+                seriesDataItem: J,
+                cardClass: 'ds-my-list-series__card',
+                imageClass: 'ds-my-list-series__image',
+                overlayClass: 'ds-my-list-series__overlay',
+              }
+            );
           }
         }
       )

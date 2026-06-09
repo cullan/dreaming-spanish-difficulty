@@ -1,44 +1,45 @@
-SeriesCard = (u) => {
-  const {
-    series: l,
-    seriesDataItem: p,
-    onClick: m
-  }
-    = u,
-    [
-      y,
-      b
-    ] = reactExports.useState(!1);
-  return reactExports.createElement(
+SeriesCard = ({
+  series,
+  seriesDataItem,
+  onClick = () => {},
+  cardClass = 'ds-series-card',
+  imageClass = 'ds-series-card__image',
+  overlayClass = 'ds-series-card__overlay',
+  titleOverlayClass = 'ds-series-card__title-overlay',
+  artworkType = 'lazy',
+  artworkLoading = 'lazy',
+}) => {
+  const [ showTitleOverlay, setShowTitleOverlay ] = reactExports.useState(false);
+  const card = reactExports.createElement(
     reactExports.Fragment,
     null,
     reactExports.createElement(
       'div',
       {
-        className: 'ds-series-card',
-        onClick: C => m(C)
+        className: cardClass,
+        style: { height: 'calc(100% - 4px - 0.3rem)' },
+        onClick: C => onClick(C)
       },
       reactExports.createElement(
         SeriesArtwork,
         {
-          type: 'lazy',
-          series: l,
+          type: artworkType,
+          loading: artworkLoading,
+          series: series,
           kind: 'vertical',
-          alt: l.title,
-          className: 'ds-series-card__image',
-          onLoad: () => b(!1),
-          onError: () => b(!0)
+          alt: series.title,
+          className: imageClass,
+          onLoad: () => setShowTitleOverlay(false),
+          onError: () => setShowTitleOverlay(true)
         }
       ),
-      reactExports.createElement('div', {
-        className: 'ds-series-card__overlay'
-      }),
-      y &&
+      reactExports.createElement('div', { className: overlayClass }),
+      showTitleOverlay &&
         reactExports.createElement('div', {
-          className: 'ds-series-card__title-overlay'
-        }, l.title),
-      reactExports.createElement(SeriesDifficultyBadgeOverlay, { episodes: p.episodes }),
-      p.locked &&
+          className: titleOverlayClass
+        }, series.title),
+      reactExports.createElement(SeriesDifficultyBadgeOverlay, { episodes: seriesDataItem.episodes }),
+      seriesDataItem.locked &&
         reactExports.createElement(
           'div',
           {
@@ -53,5 +54,12 @@ SeriesCard = (u) => {
           )
         )
     )
-  )
+  );
+  return reactExports.createElement(
+    SeriesProgressBar,
+    {
+      episodes: seriesDataItem.episodes,
+      child: card
+    }
+  );
 };

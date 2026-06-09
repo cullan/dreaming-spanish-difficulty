@@ -70,54 +70,23 @@ SeriesCatalog = (u) => {
             path: `${ SERIES }/${ l }`,
             language: y
           }),
-          slideClass: 'ds-series-catalog__slide',
+          slideClass: 'ds-series-catalog__slide extension-series-wrapper',
           elements: R,
           onClick: D,
           onRender: (O, q, P, G) => {
             const J = m[O._id];
-            return G === void 0 ? reactExports.createElement(reactExports.Fragment, null) : reactExports.createElement(
-              'div',
+            return reactExports.createElement(
+              SeriesCard,
               {
-                className: 'ds-series-catalog__card',
-                'data-testid': 'series-catalog-card'
-              },
-              reactExports.createElement(
-                SeriesArtwork,
-                {
-                  type: q < P + 2 * Math.ceil(G) ? 'standard' : 'lazy',
-                  series: O,
-                  kind: 'vertical',
-                  alt: O.title,
-                  className: 'ds-series-catalog__image',
-                  loading: q < P + 2 * Math.ceil(G) ? 'eager' : 'lazy',
-                  onLoad: () => N(O._id),
-                  onError: () => F(O._id)
-                }
-              ),
-              !J?.locked &&
-                reactExports.createElement('div', {
-                  className: 'ds-series-catalog__overlay'
-                }),
-              reactExports.createElement(SeriesDifficultyBadgeOverlay, { episodes: J.episodes }),
-              C[O._id] &&
-                reactExports.createElement('div', {
-                  className: 'ds-series-catalog__title-overlay'
-                }, O.title),
-              J?.locked &&
-                reactExports.createElement(
-                  'div',
-                  {
-                    className: 'ds-series-catalog__premium-overlay'
-                  },
-                  reactExports.createElement(
-                    IconMoon,
-                    {
-                      className: 'ds-series-catalog__premium-icon',
-                      icon: 'thick-lock'
-                    }
-                  )
-                )
-            )
+                series: O,
+                seriesDataItem: J,
+                cardClass: 'ds-series-catalog__card',
+                imageClass: 'ds-series-catalog__image',
+                overlayClass: 'ds-series-catalog__overlay',
+                artworkType: q < P + 2 * Math.ceil(G) ? 'standard' : 'lazy',
+                artworkLoading: q < P + 2 * Math.ceil(G) ? 'eager' : 'lazy',
+              }
+            );
           }
         }
       )

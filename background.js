@@ -6,6 +6,7 @@ async function replacementSrc() {
     'replacements/SeriesDifficultyBadgeOverlay.js', // difficulty range for a series in corner overlay
     'replacements/VideoDifficultyBadge.js', // difficulty badge for video cards
     'replacements/SeriesDifficultyBadge.js', // difficulty badge for series
+    'replacements/SeriesProgressBar.js', // wrap a series component and display progress beneath it
     // edited components
     'replacements/CatalogVideoCard.js', // video cards on library page
     'replacements/EpisodeCard.js', // video card on series detail page
